@@ -13,54 +13,54 @@ public class MessageTest {
 
     @Test
     public void testMessageLengthSuccess() {
-        boolean actual = msg.checkMessageLength("Hi Mike, can you join us for dinner tonight?");
-        assertTrue(actual);
+        assertTrue(msg.checkMessageLength("Hi Mike, can you join us for dinner tonight?"));
     }
 
     @Test
     public void testMessageLengthFailure() {
         String longMessage = "a".repeat(251);
-        boolean actual = msg.checkMessageLength(longMessage);
-        assertFalse(actual);
+        assertFalse(msg.checkMessageLength(longMessage));
     }
 
     @Test
     public void testRecipientCellSuccess() {
-        boolean actual = msg.checkRecipientCell("+27718693");
-        assertTrue(actual);
+        assertTrue(msg.checkRecipientCell("+2771869300"));
     }
 
     @Test
     public void testRecipientCellFailure() {
-        boolean actual = msg.checkRecipientCell("0831234567");
-        assertFalse(actual);
+        assertFalse(msg.checkRecipientCell("0831234567"));
+    }
+
+    @Test
+    public void testCreateMessageIDFormat() {
+        String id = msg.createMessageID(0);
+        assertNotNull(id);
+        assertTrue(id.length() <= 10);
     }
 
     @Test
     public void testCreateMessageHash() {
-        String id = "1234567890";
+        String id = "ID0000";
         int num = 0;
-        String text = "Hi thanks";
-        String expected = "12:0:HITHANKS";
+        String text = "Did you get the cake?";
+        String expected = "ID:0:DIDCAKE";
         String actual = msg.createMessageHash(id, num, text);
         assertEquals(expected, actual);
     }
 
     @Test
     public void testSentMessageOption1() {
-        String actual = msg.sentMessage(1);
-        assertEquals("Message successfully sent.", actual);
+        assertEquals("Message successfully sent.", msg.sentMessage(1));
     }
 
     @Test
     public void testSentMessageOption2() {
-        String actual = msg.sentMessage(2);
-        assertEquals("Press 0 to delete the message.", actual);
+        assertEquals("Press 0 to delete the message.", msg.sentMessage(2));
     }
 
     @Test
     public void testSentMessageOption3() {
-        String actual = msg.sentMessage(3);
-        assertEquals("Message successfully stored.", actual);
+        assertEquals("Message successfully stored.", msg.sentMessage(3));
     }
 }

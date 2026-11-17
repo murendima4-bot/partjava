@@ -15,31 +15,28 @@ public class Login {
     public String firstName;
     public String lastName;
     
-    public boolean  checkUserName(String userName){
-        if (userName.contains("_") && userName.length() <=5) {
+    public boolean checkUserName(String userName){
+        if (userName != null && userName.contains("_") && userName.length() <= 5) {
             return true;
         } else {
             return false;
         }
     }
     
-    public boolean checkPasswordComplexity( String userPassword) {
+    public boolean checkPasswordComplexity(String userPassword) {
         if (userPassword != null && userPassword.matches("^(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z0-9]).{8,}$")) {
-
             return true;
-    } else {
+        } else {
             return false;
-            }
+        }
     }
     
     public boolean checkCellPhoneNumber(String userCellNumber) {  
-     
-        if (userCellNumber.matches("^\\+\\d+") && userCellNumber.length() <= 13) {
+        if (userCellNumber != null && userCellNumber.matches("^\\+\\d+") && userCellNumber.length() <= 15) {
             return true;
         } else {
             return false;
         }
-        
     }
     
     public String registerUser(String userName, String userPassword, String userCellNumber) {
@@ -55,37 +52,26 @@ public class Login {
             return "Password is not correctly formatted, please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";
         }
         
-       if (checkCellPhoneNumber(userCellNumber) == false) {
-            return "Cell number is not correctly formatted or does not contain an international code,please correct the number and try again.";
+        if (checkCellPhoneNumber(userCellNumber) == false) {
+            return "Cell number is not correctly formatted or does not contain an international code, please correct the number and try again.";
         }
         
         return "Username successfully captured";
-
-        
-            
-    
     }    
     
     public boolean loginUser(String enteredUsername, String enteredPassword) {
-    
-    // Compares the entered inputs against your userName and userPassword variables
-    if (enteredUsername.equals(userName) && enteredPassword.equals(userPassword)) {
-        return true;
-    } else {
-        return false;
+        if (enteredUsername != null && enteredUsername.equals(userName) && enteredPassword != null && enteredPassword.equals(userPassword)) {
+            return true;
+        } else {
+            return false;
+        }
     }
-    
-}
-
-    
-
 
     public String returnLoginStatus(boolean isLoggedIn) {
-    
-    if (isLoggedIn == true) {
-        return "Welcome " +  firstName + ", " + lastName + "it is great to see you again";
-    } else {
-        return "Username or password incorrect";
+        if (isLoggedIn == true) {
+            return "Welcome " + firstName + ", " + lastName + " it is great to see you again";
+        } else {
+            return "Username or password incorrect";
+        }
     }
-    }
-    }
+}
